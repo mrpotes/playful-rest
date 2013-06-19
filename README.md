@@ -6,7 +6,7 @@ for a domain model defined as case classes.
 ## To use
 
 * Add the following resolver to your Build.scala:
-		resolvers += "playful-rest on GitHub" at "https://github.com/mrpotes/playful-rest"
+		resolvers += "playful-rest on GitHub" at "https://raw.github.com/mrpotes/playful-rest/repository"
 * And then add the following dependency:
 		"playful-rest" %% "playful-rest" % "1.0"
 * Implement some serialization traits, or ad a dependency on one of the predefined libraries
