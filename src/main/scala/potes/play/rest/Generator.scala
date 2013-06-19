@@ -17,11 +17,6 @@ object Generator {
     import nme.CONSTRUCTOR
     import tpnme.EMPTY
     
-    println(implicitly[WeakTypeTag[T]].tpe.asInstanceOf[TypeRef].sym)
-    println(implicitly[WeakTypeTag[T]].tpe.asInstanceOf[TypeRef].typeSymbol)
-    
-    println(showRaw(reify(new Object).tree))
-    
     val playFormatter = helper.selectFullyQualified("play.api.libs.json.Json.format")
 
     val stmts = ListBuffer[Tree]()
@@ -45,7 +40,7 @@ object Generator {
     val obj = ModuleDef(NoMods, newTermName("REGEXES"), Template(objInheritance, emptyValDef, objectBody))
     val block = Block(List(obj), Ident(newTermName("REGEXES")))
 
-    println(showRaw(block))
+    helper.debug(showRaw(block))
     println(show(block))
     c.Expr[Any](block)
   }
@@ -57,8 +52,8 @@ object Generator {
     import c.universe._
 
     def pathsValueFinder(t: Tree) = t match {
-      case ValDef(_, _, _, s: Select) => "restapi.Generator.macroPaths" == s.toString
-      case ValDef(_, _, _, TypeApply(s: Select, _)) => "restapi.Generator.macroPaths" == s.toString
+      case ValDef(_, _, _, s: Select) => "potes.play.rest.Generator.macroPaths" == s.toString
+      case ValDef(_, _, _, TypeApply(s: Select, _)) => "potes.play.rest.Generator.macroPaths" == s.toString
       case _ => false
     }
     val pathsValue = c.enclosingUnit.body.find(pathsValueFinder)

@@ -30,4 +30,5 @@ for a domain model defined as case classes.
 ## More Information
 
 Have a read of the series of blog posts on 
-[ScottLogic's blog](http://www.scottlogic.co.uk/blog/2013/06/05/scala-macros-part-1.html)
+[ScottLogic's blog](http://www.scottlogic.co.uk/blog/2013/06/05/scala-macros-part-1.html),
+or take a look at the [example branch](tree/example).

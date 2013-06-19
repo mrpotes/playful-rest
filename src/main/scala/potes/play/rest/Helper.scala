@@ -55,10 +55,10 @@ class Helper[C <: Context](val c: C) {
   private def isRestApiClass(symbol: ClassSymbol) = {
     val companionTraits = symbol.companionSymbol.typeSignature.baseClasses
     val isApiClass = symbol.isCaseClass && companionTraits.exists(isRestApiTrait)
-    println("Checking class: "+symbol.name.decoded+" with traits "+companionTraits + " - "+isApiClass)
+    debug("Checking class: "+symbol.name.decoded+" with traits "+companionTraits + " - "+isApiClass)
     isApiClass
   }
-
+  
   private def modelClasses = {
     val classpath = c.compilerSettings(c.compilerSettings.indexOf("-classpath") + 1)
     val classpathClasses = classpath.split(File.pathSeparator).toList.flatten(s => getClassesFromClasspathEntry(new File(s))).toSet
@@ -79,8 +79,8 @@ class Helper[C <: Context](val c: C) {
   }
 
   private def isRestApiTrait (s : Symbol) : Boolean = {
-    println("Checking "+s.fullName)
-    if (s.fullName.startsWith("restapi.actions.")) true
+    debug("Checking "+s.fullName+" starts with potes.play.rest.actions.")
+    if (s.fullName.startsWith("potes.play.rest.actions.")) true
     else false
   }
 
@@ -102,6 +102,11 @@ class Helper[C <: Context](val c: C) {
     } else {
       Ident(newTermName(fqn))
     }
+  }
+  
+  val isVerbose = c.compilerSettings.contains("-verbose")
+  def debug(s: String) = {
+    if (isVerbose) println(s)
   }
 
 }
