@@ -33,6 +33,10 @@ for a domain model defined as case classes.
           override def onRouteRequest(request: RequestHeader): Option[Handler] = potes.play.rest.Generator.macroCase(request.path, request.method)
         }
 
+One **GOTCHA** to watch out for - when you change one of the case classes in your model, you'll need to do 
+a full build if you want the change to be reflected in the REST API. I'm looking for a way around this, and
+will publish here if/when I find one.
+
 ## More Information
 
 Have a read of the series of blog posts on 
